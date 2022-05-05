@@ -13,6 +13,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
         name = itemView.findViewById(R.id.name);
-        size = itemView.findViewById(R.id.height);
+        size = itemView.findViewById(R.id.size);
     }
 }
