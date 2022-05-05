@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     private final String JSON_FILE = "mountains.json";
     private final String TAG = "==>";
 
-    private RecyclerView recyclerView;
+    private RecyclerView RecyclerView;
     private ArrayList<Mountains> listOfMountains;
     private MyAdapter adapter;
 
@@ -29,11 +29,13 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         new JsonTask(this).execute(JSON_URL);
 
-        recyclerView = findViewById(R.id.recyler_view);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView = findViewById(R.id.recyler_view);
+        RecyclerView.setAdapter(adapter);
+        adapter = new MyAdapter(listOfMountains);
+        RecyclerView.setLayoutManager(new LinearLayoutManager(this));
         listOfMountains = new ArrayList<Mountains>();
     }
 
@@ -42,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Log.d("MainActivity", json);
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<Mountains>>() {}.getType();
-        ArrayList<Mountains> listOfMountains = gson.fromJson(json, type);
+        ArrayList<Mountains> lista = gson.fromJson(json, type);
+        listOfMountains.addAll(lista);
+        adapter.notifyDataSetChanged();
+        Log.d(TAG, "Antal Berg: "+listOfMountains.size());
+        Log.d(TAG, "Första Berget: "+listOfMountains.get(0).toString());
     }
 }
