@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
     private RecyclerView recyclerView;
     private ArrayList<Mountains> listOfMountains;
+    private MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         new JsonTask(this).execute(JSON_URL);
 
         recyclerView = findViewById(R.id.recyler_view);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         listOfMountains = new ArrayList<Mountains>();
     }
 
