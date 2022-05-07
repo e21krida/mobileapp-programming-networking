@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
-    private List<Mountains> Mountains;
-    public MyAdapter(List<Mountains> mountains) {
-        this.Mountains = mountains;
+    private List<Mountains> listOfMountains;
+    public MyAdapter(List<Mountains> listOfMountains) {
+        this.listOfMountains = listOfMountains;
     }
 
     @NonNull
@@ -24,12 +24,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            holder.name.setText(Mountains.get(position).getName());
-            holder.size.setText(String.valueOf(Mountains.get(position).getSize()));
+            holder.name.setText(listOfMountains.get(position).getName());
+            holder.size.setText(String.valueOf(listOfMountains.get(position).getSize()));
     }
 
     @Override
     public int getItemCount() {
-        return Mountains.size();
+        return listOfMountains.size();
     }
 }
